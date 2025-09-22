@@ -109,25 +109,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observe elements that should animate on scroll
-    const animateElements = document.querySelectorAll('.animate-fade-in-up, .card, .role, .skill-group, .contact-item');
-    animateElements.forEach(el => {
-        // Set initial state
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    const animateElements = document.querySelectorAll('.animate-fade-in-up, .animate-slide-in-left, .animate-slide-in-right, .animate-zoom-in, .card, .role, .skill-group, .contact-item');
+    animateElements.forEach((el, index) => {
+        // Set initial state based on animation class
+        if (el.classList.contains('animate-slide-in-left')) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateX(-50px) scale(0.9)';
+        } else if (el.classList.contains('animate-slide-in-right')) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateX(50px) scale(0.9)';
+        } else if (el.classList.contains('animate-zoom-in')) {
+            el.style.opacity = '0';
+            el.style.transform = 'scale(0.5) rotate(-10deg)';
+        } else {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px) scale(0.9)';
+        }
+        
+        el.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        
+        // Add staggered delay
+        if (el.classList.contains('animate-delay-1')) {
+            el.style.transitionDelay = '0.1s';
+        } else if (el.classList.contains('animate-delay-2')) {
+            el.style.transitionDelay = '0.2s';
+        } else if (el.classList.contains('animate-delay-3')) {
+            el.style.transitionDelay = '0.3s';
+        } else if (el.classList.contains('animate-delay-4')) {
+            el.style.transitionDelay = '0.4s';
+        }
         
         observer.observe(el);
     });
 
-    // Parallax effect for hero section
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = scrolled * 0.5;
-            hero.style.transform = `translateY(${parallax}px)`;
-        }, { passive: true });
-    }
+    // Removed problematic parallax effect to fix overlapping issues
 
     // Typing animation for hero title
     const heroTitle = document.querySelector('.hero h1');
@@ -167,11 +182,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(button => {
         button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
+            this.style.transform = 'translateY(-5px) scale(1.05)';
+            this.style.boxShadow = '0 15px 35px rgba(139, 92, 246, 0.4)';
         });
         
         button.addEventListener('mouseleave', function() {
             this.style.transform = '';
+            this.style.boxShadow = '';
+        });
+        
+        button.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+        
+        button.addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(-5px) scale(1.05)';
         });
     });
 
