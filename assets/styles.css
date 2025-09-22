@@ -1,0 +1,161 @@
+/* Base and theming */
+:root {
+  --bg: #ffffff;
+  --text: #111827; /* gray-900 */
+  --muted: #4b5563; /* gray-600 */
+  --primary: #0ea5e9; /* sky-500 */
+  --primary-600: #0284c7; /* sky-600 */
+  --card: #f8fafc; /* slate-50 */
+  --border: #e5e7eb; /* gray-200 */
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --primary: #38bdf8;
+    --primary-600: #0ea5e9;
+    --card: #0f172a;
+    --border: #1f2937;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+.container {
+  width: min(1024px, 92%);
+  margin: 0 auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  background: var(--primary);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: color-mix(in oklab, var(--bg) 92%, transparent);
+  backdrop-filter: saturate(150%) blur(12px);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0.5rem;
+}
+.brand .name {
+  font-size: clamp(1.25rem, 1.5vw + 1rem, 2rem);
+  margin: 0 0 0.25rem 0;
+}
+.brand .title, .brand .meta {
+  margin: 0;
+  color: var(--muted);
+}
+.primary-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.primary-nav a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.4rem;
+}
+.primary-nav a:hover,
+.primary-nav a:focus {
+  background: var(--card);
+}
+
+/* Sections */
+.section {
+  padding: clamp(2rem, 3vw + 1rem, 4rem) 0;
+  border-bottom: 1px solid var(--border);
+}
+.section h2 {
+  font-size: clamp(1.25rem, 1vw + 1rem, 1.75rem);
+  margin: 0 0 1rem 0;
+}
+.section p { margin: 0.25rem 0; }
+
+/* Skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.skill-group {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+.skill-group h3 {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+.skill-group ul {
+  margin: 0.5rem 0 0 1rem;
+}
+
+/* Experience */
+.role { margin-bottom: 1.25rem; }
+.role header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+.role h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.role .time { color: var(--muted); margin: 0; }
+.role ul { margin: 0.5rem 0 0 1.125rem; }
+
+/* Contact */
+#contact a {
+  color: var(--primary-600);
+  text-underline-offset: 2px;
+}
+#contact a:hover { color: var(--primary); }
+
+/* Footer */
+.site-footer {
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--muted);
+}
